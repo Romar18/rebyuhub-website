@@ -831,6 +831,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     saveQuizBtn.disabled = true;
+    showAlert("Creating quiz...", "info");
 
     try {
       const response = await fetch("/api/create-quiz", {
