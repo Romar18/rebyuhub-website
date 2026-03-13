@@ -17,6 +17,12 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../index.html"))
 })
 
+app.get("/api/debug-users", (req, res) => {
+  db.all("SELECT * FROM users", [], (err, rows) => {
+    res.json(rows)
+  })
+})
+
 // Setup multer for file uploads
 const uploadDir = "public/uploads";
 if (!fs.existsSync(uploadDir)) {
