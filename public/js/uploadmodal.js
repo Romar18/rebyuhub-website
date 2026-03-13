@@ -119,6 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       uploadConfirmBtn.disabled = true;
+      showAlert("Uploading...", "info");
 
       const formData = new FormData();
 
