@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | RebyuHub</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/auth-shared.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/alert.css">
+    <link rel="stylesheet" href="../css/loading-screen.css">
+</head>
+<body>
+  <div id="page-content">
+    <div class="glow" id="glow"></div>
+    <div class="container">
+      <h2>Login</h2>
+
+      <form id="loginForm">
+        <div class="input-group">
+          <label>Username</label>
+          <input id="username" placeholder="Enter your username" required>
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="password" placeholder="Enter your password" required>
+            <button type="button" class="toggle" onclick="togglePassword('password', this)">Show</button>
+          </div>
+        </div>
+
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+
+      <div class="footer">
+        Don't have an account? <a href="register.html" onclick="goRegister()">Register here</a>
+      </div>
+    </div>
+  </div>
+  <div id="alert-container"></div>
+  <div id="loading-screen">
+    <div class="spinner"></div>
+  </div>
+
+  <script src="../js/alert.js"></script>
+  <script src="../js/auth.js"></script>
+</body>
+</html>

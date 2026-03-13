@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Result | RebyuHub</title>
+  <script>
+    const currentThemeUser = JSON.parse(localStorage.getItem("user") || "null");
+    const currentThemeKey = currentThemeUser?.id
+      ? `theme_user_${currentThemeUser.id}`
+      : "theme";
+    if (localStorage.getItem(currentThemeKey) === "light") {
+      document.documentElement.classList.add("light-theme");
+    }
+  </script>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/logo.css">
+  <link rel="stylesheet" href="../css/quiz.css">
+  <link rel="stylesheet" href="../css/next-back.css">
+  <link rel="stylesheet" href="../css/alert.css">
+</head>
+
+<body>
+  <main class="quiz-result-page">
+    <section class="quiz-result-shell">
+      <a href="dashboard.html" class="quiz-back-link back-control">
+        <img src="../icons/back-icon.png" alt="back icon">
+        <span>Back to Dashboard</span>
+      </a>
+
+      <div class="quiz-result-card">
+        <span class="quiz-category-pill" id="resultCategory">Result</span>
+        <h1 id="resultQuizTitle">Quiz Result</h1>
+        <p id="resultSummary">We’re loading your final score.</p>
+
+        <div class="quiz-result-stats">
+          <div class="quiz-result-stat">
+            <span>Score</span>
+            <strong id="resultScore">0 / 0</strong>
+          </div>
+          <div class="quiz-result-stat">
+            <span>Percentage</span>
+            <strong id="resultPercentage">0%</strong>
+          </div>
+          <div class="quiz-result-stat">
+            <span>Time Taken</span>
+            <strong id="resultTimeTaken">0s</strong>
+          </div>
+        </div>
+
+        <div class="quiz-result-actions">
+          <button id="retryQuizBtn" class="quiz-btn" type="button">Retry Quiz</button>
+          <button id="viewLeaderboardBtn" class="quiz-btn secondary" type="button">View Leaderboard</button>
+        </div>
+      </div>
+
+      <section class="quiz-leaderboard-card leaderboard-collapsed" id="leaderboardCard">
+        <div class="quiz-leaderboard-header">
+          <h2>Leaderboard</h2>
+          <p>Top performers for this quiz.</p>
+        </div>
+        <div id="leaderboardList" class="quiz-leaderboard-list"></div>
+      </section>
+    </section>
+  </main>
+
+  <div id="alert-container"></div>
+
+  <script src="../js/alert.js" defer></script>
+  <script src="../js/quiz-result.js" defer></script>
+</body>
+
+</html>

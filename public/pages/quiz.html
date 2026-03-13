@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Take Quiz | RebyuHub</title>
+  <script>
+    const currentThemeUser = JSON.parse(localStorage.getItem("user") || "null");
+    const currentThemeKey = currentThemeUser?.id
+      ? `theme_user_${currentThemeUser.id}`
+      : "theme";
+    if (localStorage.getItem(currentThemeKey) === "light") {
+      document.documentElement.classList.add("light-theme");
+    }
+  </script>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/logo.css">
+  <link rel="stylesheet" href="../css/quiz.css">
+  <link rel="stylesheet" href="../css/next-back.css">
+  <link rel="stylesheet" href="../css/alert.css">
+</head>
+
+<body>
+  <main class="quiz-play-page">
+    <section class="quiz-play-shell">
+      <div class="quiz-topbar">
+        <a href="dashboard.html" class="quiz-back-link back-control">
+          <img src="../icons/back-icon.png" alt="back icon">
+          <span>Back to Dashboard</span>
+        </a>
+        <div class="quiz-topbar-meta">
+          <span id="quizPlayerCategory" class="quiz-category-pill">Quiz</span>
+          <span id="quizQuestionCounter" class="quiz-counter">0 / 0</span>
+        </div>
+      </div>
+
+      <div class="quiz-progress-card">
+        <div class="quiz-progress-text">
+          <span>Progress</span>
+          <strong id="quizProgressPercent">0%</strong>
+        </div>
+        <div class="quiz-progress-bar">
+          <span id="quizProgressFill"></span>
+        </div>
+      </div>
+
+      <div id="quizPlayerState" class="quiz-player-card">
+        <div class="quiz-loading-state">
+          <h1>Preparing your quiz...</h1>
+          <p>We’re loading your questions and getting the attempt ready.</p>
+        </div>
+      </div>
+
+      <div class="quiz-player-footer">
+        <button id="quizPrevBtn" class="quiz-btn secondary quiz-nav-btn" type="button">
+          <img src="../icons/back-icon.png" alt="previous icon">
+          <span>Previous</span>
+        </button>
+        <button id="quizNextBtn" class="quiz-btn quiz-nav-btn" type="button">
+          <span>Next Question</span>
+          <img src="../icons/next-icon.png" alt="next icon">
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <div id="alert-container"></div>
+
+  <script src="../js/alert.js" defer></script>
+  <script src="../js/quiz-player.js" defer></script>
+</body>
+
+</html>

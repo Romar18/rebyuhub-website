@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | RebyuHub</title>
+    <script>
+      const currentThemeUser = JSON.parse(localStorage.getItem("user") || "null");
+      const currentThemeKey = currentThemeUser?.id
+        ? `theme_user_${currentThemeUser.id}`
+        : "theme";
+      if (localStorage.getItem(currentThemeKey) === "light") {
+        document.documentElement.classList.add("light-theme");
+      }
+    </script>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/profile-page.css">
+    <link rel="stylesheet" href="../css/alert.css">
+    <link rel="stylesheet" href="../css/logo.css">
+  </head>
+
+  <body>
+
+    <header class="navbar">
+      <div class="logo">RebyuHub</div>
+    </header>
+
+    <main class="dashboard-container">
+
+      <section class="profile-page">
+
+        <div class="profile-header-controls">
+          <a href="dashboard.html" class="back-control">
+            <img src="../icons/back-icon.png" alt="back icon" class="back-icon">
+            <span>Go Back</span>
+          </a>
+          <button id="editModeToggle" class="edit-mode-btn">Edit Profile</button>
+        </div>
+
+        <!-- PROFILE OVERVIEW -->
+
+        <div class="profile-overview">
+
+          <div class="profile-avatar">
+            <img id="profileImg" src="../icons/profile-icon.png" alt="Profile picture" class="clickable-avatar">
+            <label for="profilePictureInput" class="change-picture-btn">Change Picture</label>
+            <input type="file" id="profilePictureInput" accept="image/jpeg,image/jpg,image/png,image/webp" style="display: none;">
+          </div>
+
+          <div class="profile-main-info">
+            <span class="profile-chip" id="profileModeBadge">Profile</span>
+            <h1 id="displayName">Loading...</h1>
+            <p class="username">@<span id="displayUsername">loading</span></p>
+            <p class="email" id="displayEmail">loading@email.com</p>
+            
+            <div class="bio-section">
+              <p id="displayBio" class="bio">Loading bio...</p>
+              <button id="editBioBtn" class="edit-btn">Edit Bio</button>
+            </div>
+
+            <div id="bioEditForm" class="bio-edit-form" style="display: none;">
+              <textarea id="bioInput" placeholder="Write your bio..." maxlength="200"></textarea>
+              <small id="bioCharCount">0/200</small>
+              <div class="bio-btn-group">
+                <button id="saveBioBtn" class="save-btn">Save</button>
+                <button id="cancelBioBtn" class="cancel-btn">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="profile-stats-grid">
+          <article class="profile-stat-card">
+            <span class="profile-stat-label">Reviewers</span>
+            <strong id="displayReviewerCount">0</strong>
+            <p>Study materials uploaded</p>
+          </article>
+
+          <article class="profile-stat-card">
+            <span class="profile-stat-label">Created Quizzes</span>
+            <strong id="displayCreatedQuizCount">0</strong>
+            <p>Quizzes published by this user</p>
+          </article>
+
+          <article class="profile-stat-card">
+            <span class="profile-stat-label">Completed Attempts</span>
+            <strong id="displayCompletedAttemptCount">0</strong>
+            <p>Finished quiz attempts</p>
+          </article>
+
+          <article class="profile-stat-card">
+            <span class="profile-stat-label">Average Score</span>
+            <strong id="displayAverageScore">0%</strong>
+            <p>Across completed quizzes</p>
+          </article>
+        </div>
+
+
+        <!-- PERSONAL INFORMATION -->
+
+        <div class="profile-section">
+
+          <h2>Personal Information</h2>
+
+          <div class="profile-grid">
+
+            <div class="profile-card">
+              <h3>Birthdate</h3>
+              <p id="displayBirthdate">Loading...</p>
+            </div>
+
+            <div class="profile-card">
+              <h3>Gender</h3>
+              <p id="displayGender">Loading...</p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ACADEMIC INFORMATION -->
+
+        <div class="profile-section">
+
+          <h2>Academic Information</h2>
+
+          <div class="profile-grid">
+
+            <div class="profile-card">
+              <h3>Program</h3>
+              <p id="displayProgram">Loading...</p>
+            </div>
+
+            <div class="profile-card">
+              <h3>Year Level</h3>
+              <p id="displayYearLevel">Loading...</p>
+            </div>
+
+            <div class="profile-card">
+              <h3>University</h3>
+              <p id="displayUniversity">Loading...</p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- JOINED DATE -->
+
+        <div class="profile-section">
+
+          <h2>Account</h2>
+
+          <div class="profile-grid">
+
+            <div class="profile-card">
+              <h3>Joined RebyuHub</h3>
+              <p id="displayJoined">Loading...</p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="profile-duo-panels">
+          <section class="profile-panel">
+            <div class="profile-panel-head">
+              <div>
+                <span class="profile-chip">Latest Reviewers</span>
+                <h2>Recent uploads</h2>
+              </div>
+            </div>
+            <div class="profile-activity-list" id="profileRecentReviewers"></div>
+            <p class="profile-empty-note" id="profileRecentReviewersEmpty">No reviewers uploaded yet.</p>
+          </section>
+
+          <section class="profile-panel">
+            <div class="profile-panel-head">
+              <div>
+                <span class="profile-chip">Latest Quizzes</span>
+                <h2>Recent quiz creations</h2>
+              </div>
+            </div>
+            <div class="profile-activity-list" id="profileRecentQuizzes"></div>
+            <p class="profile-empty-note" id="profileRecentQuizzesEmpty">No quizzes created yet.</p>
+          </section>
+        </div>
+
+      </section>
+
+      <!-- PROFILE PICTURE MODAL -->
+      <div id="profileModal" class="profile-modal">
+        <div class="modal-content">
+          <button class="modal-close" id="modalCloseBtn">&times;</button>
+          <img id="modalImg" src="" alt="Full profile picture">
+        </div>
+      </div>
+
+    </main>
+
+    <div id="alert-container"></div>
+
+    <script src="../js/alert.js"></script>
+    <script src="../js/profile.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,28 @@
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #22c55e;
+
+  animation: floatLogo 3s ease-in-out infinite, glowLogo 2s ease-in-out infinite alternate;
+}
+
+@keyframes floatLogo {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowLogo {
+  0% {
+    text-shadow: 0 0 4px #22c55e55;
+  }
+  100% {
+    text-shadow: 0 0 12px #22c55e;
+  }
+}

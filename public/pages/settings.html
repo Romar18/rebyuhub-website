@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings | RebyuHub</title>
+  <script>
+    const currentThemeUser = JSON.parse(localStorage.getItem("user") || "null");
+    const currentThemeKey = currentThemeUser?.id
+      ? `theme_user_${currentThemeUser.id}`
+      : "theme";
+    if (localStorage.getItem(currentThemeKey) === "light") {
+      document.documentElement.classList.add("light-theme");
+    }
+  </script>
+
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/logo.css">
+  <link rel="stylesheet" href="../css/settings.css">
+  <link rel="stylesheet" href="../css/profile-page.css">
+  <link rel="stylesheet" href="../css/alert.css">
+
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="logo">RebyuHub</div>
+  </header>
+
+  <main class="dashboard-container">
+
+    <a href="dashboard.html" class="back-control">
+      <img src="../icons/back-icon.png" alt="back icon" class="back-icon">
+      <span>Go Back</span>
+    </a>
+
+    <section class="settings-page">
+
+      <div class="settings-page-header">
+        <button class="settings-menu-btn" id="settingsMenuBtn" type="button" aria-label="Open settings menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div>
+          <h1 class="settings-title">Settings</h1>
+          <p class="settings-subtitle">Manage your account, security, and appearance preferences.</p>
+        </div>
+      </div>
+
+      <div class="settings-layout">
+
+        <!-- SIDEBAR -->
+
+        <div class="settings-sidebar-overlay" id="settingsSidebarOverlay"></div>
+
+        <div class="settings-sidebar" id="settingsSidebar">
+
+          <div class="settings-sidebar-top">
+            <div class="settings-sidebar-brand">
+              <img src="../icons/settings-icon.png" alt="settings icon" class="settings-sidebar-brand-icon">
+              <span class="settings-sidebar-title">Settings Menu</span>
+            </div>
+            <button class="settings-sidebar-close" id="settingsSidebarClose" type="button" aria-label="Close settings menu">
+              Close
+            </button>
+          </div>
+
+          <p class="settings-category">Account</p>
+
+          <button class="settings-link active" data-panel="fullname">
+            <img src="../icons/profile-icon.png" alt="profile icon" class="settings-link-icon">
+            <span class="settings-link-text">Edit Full Name</span>
+          </button>
+
+          <button class="settings-link" data-panel="username">
+            <img src="../icons/profile-icon.png" alt="profile icon" class="settings-link-icon">
+            <span class="settings-link-text">Change Username</span>
+          </button>
+
+          <button class="settings-link" data-panel="email">
+            <img src="../icons/notif-icon.png" alt="email icon" class="settings-link-icon">
+            <span class="settings-link-text">Change Email Address</span>
+          </button>
+
+          <p class="settings-category">Security</p>
+
+          <button class="settings-link" data-panel="password">
+            <img src="../icons/settings-icon.png" alt="security icon" class="settings-link-icon">
+            <span class="settings-link-text">Change Password</span>
+          </button>
+
+          <p class="settings-category">Appearance</p>
+
+          <button class="settings-link" data-panel="theme">
+            <img src="../icons/home-icon.png" alt="theme icon" class="settings-link-icon">
+            <span class="settings-link-text">Theme</span>
+          </button>
+
+        </div>
+
+
+        <!-- CONTENT PANEL -->
+
+        <div class="settings-content">
+
+          <!-- FULL NAME -->
+
+          <div class="settings-panel active" id="fullname">
+            <div class="settings-panel-card">
+              <div class="settings-panel-head">
+                <div class="settings-panel-icon-wrap">
+                  <img src="../icons/profile-icon.png" alt="profile icon" class="settings-panel-icon">
+                </div>
+                <div>
+                  <h2>Edit Full Name</h2>
+                  <p class="settings-panel-copy">
+                    Update the full name shown on your profile and account records.
+                  </p>
+                </div>
+              </div>
+
+              <label for="settingsFullname">Full Name</label>
+              <input
+                type="text"
+                id="settingsFullname"
+                placeholder="Enter full name"
+                autocomplete="name"
+              >
+
+              <div class="form-actions">
+                <button class="save-btn" id="saveFullnameBtn" type="button">Save Changes</button>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- USERNAME -->
+
+          <div class="settings-panel" id="username">
+            <div class="settings-panel-card">
+              <div class="settings-panel-head">
+                <div class="settings-panel-icon-wrap">
+                  <img src="../icons/profile-icon.png" alt="profile icon" class="settings-panel-icon">
+                </div>
+                <div>
+                  <h2>Change Username</h2>
+                  <p class="settings-panel-copy">
+                    Choose a new username for login and your public account identity.
+                  </p>
+                </div>
+              </div>
+
+              <label for="settingsUsername">Username</label>
+              <input
+                type="text"
+                id="settingsUsername"
+                placeholder="Enter new username"
+                autocomplete="username"
+              >
+
+              <div class="form-actions">
+                <button class="save-btn" id="saveUsernameBtn" type="button">Save Changes</button>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div class="settings-panel" id="email">
+            <div class="settings-panel-card">
+              <div class="settings-panel-head">
+                <div class="settings-panel-icon-wrap">
+                  <img src="../icons/notif-icon.png" alt="email icon" class="settings-panel-icon">
+                </div>
+                <div>
+                  <h2>Change Email Address</h2>
+                  <p class="settings-panel-copy">
+                    Keep your email current so account recovery and updates stay reachable.
+                  </p>
+                </div>
+              </div>
+
+              <label for="settingsEmail">Email Address</label>
+              <input
+                type="email"
+                id="settingsEmail"
+                placeholder="Enter new email"
+                autocomplete="email"
+              >
+
+              <div class="form-actions">
+                <button class="save-btn" id="saveEmailBtn" type="button">Save Changes</button>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- PASSWORD -->
+
+          <div class="settings-panel" id="password">
+            <div class="settings-panel-card">
+              <div class="settings-panel-head">
+                <div class="settings-panel-icon-wrap">
+                  <img src="../icons/settings-icon.png" alt="security icon" class="settings-panel-icon">
+                </div>
+                <div>
+                  <h2>Change Password</h2>
+                  <p class="settings-panel-copy">
+                    Use a strong password with at least 6 characters to keep your account secure.
+                  </p>
+                </div>
+              </div>
+
+              <label for="settingsCurrentPassword">Current Password</label>
+              <div class="settings-password-field">
+                <input type="password" id="settingsCurrentPassword" autocomplete="current-password">
+                <button
+                  class="settings-password-toggle"
+                  type="button"
+                  data-password-toggle="settingsCurrentPassword"
+                >
+                  Show
+                </button>
+              </div>
+
+              <label for="settingsNewPassword">New Password</label>
+              <div class="settings-password-field">
+                <input type="password" id="settingsNewPassword" autocomplete="new-password">
+                <button
+                  class="settings-password-toggle"
+                  type="button"
+                  data-password-toggle="settingsNewPassword"
+                >
+                  Show
+                </button>
+              </div>
+
+              <label for="settingsConfirmPassword">Confirm Password</label>
+              <div class="settings-password-field">
+                <input type="password" id="settingsConfirmPassword" autocomplete="new-password">
+                <button
+                  class="settings-password-toggle"
+                  type="button"
+                  data-password-toggle="settingsConfirmPassword"
+                >
+                  Show
+                </button>
+              </div>
+
+              <div class="form-actions">
+                <button class="save-btn" id="savePasswordBtn" type="button">Update Password</button>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- THEME -->
+
+          <div class="settings-panel" id="theme">
+            <div class="settings-panel-card">
+              <div class="settings-panel-head">
+                <div class="settings-panel-icon-wrap">
+                  <img src="../icons/home-icon.png" alt="theme icon" class="settings-panel-icon">
+                </div>
+                <div>
+                  <h2>Appearance</h2>
+                  <p class="settings-panel-copy">
+                    Choose how RebyuHub looks on this device. Your preference is saved in this browser.
+                  </p>
+                </div>
+              </div>
+
+              <label for="settingsTheme">Theme</label>
+              <select id="settingsTheme">
+                <option value="dark">Dark Mode</option>
+                <option value="light">Light Mode</option>
+              </select>
+
+              <div class="form-actions">
+                <button class="save-btn" id="saveThemeBtn" type="button">Apply Theme</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="../js/alert.js"></script>
+  <script src="../js/settings.js"></script>
+  <div id="alert-container"></div>
+
+</body>
+
+</html>

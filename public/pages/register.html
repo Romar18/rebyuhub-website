@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | RebyuHub</title>
+
+  <link rel="stylesheet" href="../css/auth-shared.css">
+  <link rel="stylesheet" href="../css/register.css">
+  <link rel="stylesheet" href="../css/alert.css">
+  <link rel="stylesheet" href="../css/next-back.css">
+
+</head>
+
+<body>
+
+  <div class="glow" id="glow"></div>
+
+  <div class="container">
+
+    <h2>Create Account</h2>
+
+    <div class="step-progress">
+
+      <div class="step active" data-step="1">
+        <div class="circle">1</div>
+        <span>Account</span>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="step" data-step="2">
+        <div class="circle">2</div>
+        <span>Personal</span>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="step" data-step="3">
+        <div class="circle">3</div>
+        <span>Education</span>
+      </div>
+
+    </div>
+
+    <form id="registerForm">
+
+      <!-- CARD 1 -->
+      <div class="form-card active" id="card1">
+
+        <div class="grid-2">
+
+          <div class="input-group">
+            <label>Fullname</label>
+            <input type="text" id="fullname" placeholder="Enter Fullname" required>
+          </div>
+
+          <div class="input-group">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Enter username" required>
+          </div>
+
+          <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Enter email" required>
+          </div>
+
+          <div class="input-group">
+            <label>Password</label>
+            <div class="password-wrapper">
+              <input type="password" id="password" placeholder="Enter password" required>
+              <button type="button" class="toggle" onclick="togglePassword('password', this)">Show</button>
+            </div>
+          </div>
+
+          <div class="input-group full">
+            <label>Confirm Password</label>
+
+            <div class="password-wrapper">
+              <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+              <button type="button" class="toggle" onclick="togglePassword('confirmPassword', this)">Show</button>
+            </div>
+
+            <div class="error" id="errorMessage">Passwords do not match</div>
+          </div>
+
+        </div>
+
+        <div class="form-nav">
+          <div class="spacer"></div>
+          <a href="#card2" class="next-control">
+            <span>Next</span>
+            <img src="../icons/next-icon.png" class="next-icon">
+          </a>
+        </div>
+
+      </div>
+
+
+      <!-- CARD 2 -->
+      <div class="form-card" id="card2">
+
+        <div class="input-group">
+          <label>Birthdate</label>
+          <input type="date" id="birthdate" required>
+        </div>
+
+        <div class="input-group">
+          <label>Gender</label>
+
+          <div class="gender-pills">
+
+            <label class="pill">
+              <input type="radio" name="gender" value="Male">
+              <span>Male</span>
+            </label>
+
+            <label class="pill">
+              <input type="radio" name="gender" value="Female">
+              <span>Female</span>
+            </label>
+
+            <label class="pill">
+              <input type="radio" name="gender" value="Prefer not to say">
+              <span>Prefer not to say</span>
+            </label>
+
+          </div>
+
+        </div>
+
+        <div class="form-nav">
+          <a href="#card1" class="back-control">
+            <img src="../icons/back-icon.png" alt="back icon" class="back-icon">
+            <span>Go Back</span>
+          </a>
+          <a href="#card3" class="next-control">
+            <span>Next</span>
+            <img src="../icons/next-icon.png" alt="next icon" class="next-icon">
+          </a>
+        </div>
+
+      </div>
+
+
+      <!-- CARD 3 -->
+      <div class="form-card" id="card3">
+
+        <div class="input-group">
+          <label>Program</label>
+          <input type="text" id="program" placeholder="Enter program" required>
+        </div>
+
+        <div class="input-group">
+          <label>Year Level</label>
+          <div class="select-wrapper">
+            <select id="yearLevel" required>
+              <option value="" disabled selected>Select year level</option>
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option>3rd Year</option>
+              <option>4th Year</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>University</label>
+          <input type="text" id="university" placeholder="Enter university" required>
+        </div>
+
+        <div class="input-group">
+          <label>Profile Picture</label>
+          <input type="file" id="profilePicture" accept="image/jpeg,image/jpg,image/png,image/webp">
+          <small style="color:#888;">JPG, PNG, WebP (Max 5MB) — Optional</small>
+        </div>
+
+        <div class="form-nav">
+          <a href="#card2" class="back-control">
+            <img src="../icons/back-icon.png" alt="back icon" class="back-icon">
+            <span>Go Back</span>
+          </a>
+          <button type="submit" class="register-btn">Register</button>
+        </div>
+
+      </div>
+
+    </form>
+
+    <div class="footer">
+      Already have an account? <a href="login.html">Login</a>
+    </div>
+
+  </div>
+
+  <div id="alert-container"></div>
+
+  <script src="../js/alert.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/register.js"></script>
+
+</body>
+
+</html>

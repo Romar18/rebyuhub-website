@@ -1,0 +1,122 @@
+/* Profile */
+.profile{
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.profile img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile:hover {
+  background: #22C55E;
+  transform: scale(1.05);
+}
+
+.profile-menu{
+  position:relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-dropdown{
+  position: absolute;
+  top: 55px;
+  right: 0;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(34,197,94,0.2);
+
+  border-radius: 12px;
+  padding: 8px 0;
+
+  min-width: 150px;
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 2000;
+}
+
+.profile-dropdown a{
+  padding:10px 16px;
+  text-decoration:none;
+  color:var(--text-main);
+  font-size:0.85rem;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  transition: background .2s ease;
+}
+
+.profile-dropdown a img{
+  object-fit: contain;
+  width: 30px;
+  height: 30px;
+}
+
+.profile-dropdown a:hover{
+  background:rgba(34,197,94,0.1);
+}
+
+.profile-menu:hover .profile-dropdown,
+.profile-menu.active .profile-dropdown{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+
+/*--RENAME MODAL BUTTONS--*/
+/* Rename modal buttons */
+
+#confirmRename{
+  background: var(--primary-gradient);
+  color: white;
+}
+#confirmDeleteBtn{
+  background: linear-gradient(to bottom right, #ef4444, #dc2626);;
+  color: white;
+}
+
+#confirmDeleteBtn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(239,68,68,0.4);
+}
+
+#confirmRename:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(34,197,94,0.3);
+}
+
+#cancelRename, #cancelDeleteBtn{
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+}
+
+#cancelRename:hover, #cancelDeleteBtn:hover{
+  border: 1px solid rgba(34,197,94,0.65);
+  transform: translateY(-2px);
+}

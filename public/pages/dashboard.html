@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RebyuHub Home</title>
+  <script>
+    const currentThemeUser = JSON.parse(localStorage.getItem("user") || "null");
+    const currentThemeKey = currentThemeUser?.id
+      ? `theme_user_${currentThemeUser.id}`
+      : "theme";
+    if (localStorage.getItem(currentThemeKey) === "light") {
+      document.documentElement.classList.add("light-theme");
+    }
+    document.documentElement.dataset.dashboardSection =
+      localStorage.getItem("activeDashboardSection") || "home-section";
+  </script>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/logo.css">
+  <link rel="stylesheet" href="../css/quiz.css">
+  <link rel="stylesheet" href="../css/progress.css">
+  <link rel="stylesheet" href="../css/profile.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../css/contact.css">
+  <link rel="stylesheet" href="../css/alert.css">
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo">
+      RebyuHub
+    </div>
+
+    <ul class="nav-list">
+
+      <li class="nav-item nav-item-home">
+        <a href="#" data-section="home-section" aria-label="Home">
+          <div class="nav-content">
+            <span class="text">Home</span>
+            <span class="icon"><img src="../icons/home-icon.png" alt="home icon"></span>
+          </div>
+        </a>
+      </li>
+
+      <li class="nav-item nav-item-reviewers">
+        <a href="#" data-section="reviewers-section" aria-label="Reviewers">
+          <div class="nav-content">
+            <span class="text">Reviewers</span>
+            <span class="icon"><img src="../icons/reviewers-icon.png" alt="reviewers icon"></span>
+          </div>
+        </a>
+      </li>
+
+      <li class="nav-item nav-item-quizzes">
+        <a href="#" data-section="quizzes-section" aria-label="Quizzes">
+          <div class="nav-content">
+            <span class="text">Quizzes</span>
+            <span class="icon"><img src="../icons/quizzes-icon.png" alt="quizzes icon"></span>
+          </div>
+        </a>
+      </li>
+
+      <li class="nav-item nav-item-progress">
+        <a href="#" data-section="progress-section" aria-label="Progress">
+          <div class="nav-content">
+            <span class="text">Progress</span>
+            <span class="icon"><img src="../icons/progress-icon.png" alt="progress icon"></span>
+          </div>
+        </a>
+      </li>
+
+      <li class="nav-item nav-item-creator">
+        <a href="#" data-section="creator-section" aria-label="About">
+          <div class="nav-content">
+            <span class="text">About</span>
+            <span class="icon"><img src="../icons/contact-icon.png" alt="contact icon"></span>
+          </div>
+        </a>
+      </li>
+
+    </ul>
+
+    <div class="profile-menu">
+      <div class="profile">
+        <img src="../icons/profile-icon.png" alt="Profile icon" id="navProfile">
+      </div>
+
+      <div class="profile-dropdown" id="profileDropdown">
+        <a href="profile.html">
+          <img src="../icons/profile-icon.png" alt="profile icon" class="dropdown-icon">
+          Profile
+        </a>
+        <a href="settings.html">
+          <img src="../icons/settings-icon.png" alt="settings icon" class="dropdown-icon">
+          Settings
+        </a>
+        <a id="logoutBtn" href="#">
+          <img src="../icons/logout-icon.png" alt="logout icon" class="dropdown-icon">
+          Logout
+        </a>
+      </div>
+    </div>
+  </header>
+  <main id="home" class="dashboard-container">
+    <section id="home-section" class="page-section">
+      <section class="home-hero">
+        <div class="welcome home-hero-card">
+          <span class="home-hero-chip">Dashboard Overview</span>
+          <h1 id="homeGreeting">Welcome back!</h1>
+          <p id="typing-text">Continue your learning journey with RebyuHub...</p>
+
+          <div class="home-hero-actions">
+            <button class="home-action-btn secondary" type="button" data-home-target="reviewers-section">
+              <img src="../icons/reviewers-icon.png" alt="reviewers icon">
+              <span>Open Reviewers</span>
+            </button>
+            <button class="home-action-btn secondary" type="button" data-home-target="quizzes-section">
+              <img src="../icons/quizzes-icon.png" alt="quizzes icon">
+              <span>Explore Quizzes</span>
+            </button>
+          </div>
+        </div>
+
+        <aside class="home-focus-card">
+          <span class="home-hero-chip">Focus Today</span>
+          <h3 id="homeFocusTitle">Build momentum with one small win.</h3>
+          <p id="homeFocusText">Open a reviewer, take a quiz, or upload something new to keep your study streak moving.</p>
+          <div class="home-focus-meta">
+            <span id="homeFocusMeta">Loading your dashboard insights...</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="stats home-stats">
+        <div class="card home-stat-card">
+          <h3>My Reviewers</h3>
+          <p id="homeReviewerCount">0</p>
+          <span class="home-stat-note">Uploaded study materials</span>
+        </div>
+
+        <div class="card home-stat-card">
+          <h3>Quizzes Taken</h3>
+          <p id="homeQuizTakenCount">0</p>
+          <span class="home-stat-note">Completed quiz attempts</span>
+        </div>
+
+        <div class="card home-stat-card">
+          <h3>Created Quizzes</h3>
+          <p id="homeCreatedQuizCount">0</p>
+          <span class="home-stat-note">Quizzes published by you</span>
+        </div>
+
+        <div class="card home-stat-card">
+          <h3>Available Quizzes</h3>
+          <p id="homeAvailableQuizCount">0</p>
+          <span class="home-stat-note">Ready to start right now</span>
+        </div>
+      </section>
+
+      <section class="home-panels">
+        <section class="recent home-panel-card">
+          <div class="home-panel-header">
+            <div>
+              <span class="home-panel-label">Recent Activity</span>
+              <h2>Latest uploads and quizzes</h2>
+            </div>
+          </div>
+
+          <div class="recent-list home-recent-list" id="homeRecentList"></div>
+          <p class="home-empty-note" id="homeRecentEmpty">No recent activity to show yet.</p>
+        </section>
+
+        <section class="home-panel-card">
+          <div class="home-panel-header">
+            <div>
+              <span class="home-panel-label">Quick Access</span>
+              <h2>Jump back into your workflow</h2>
+            </div>
+          </div>
+
+          <div class="home-shortcuts">
+            <button class="home-shortcut-card" type="button" data-home-target="reviewers-section">
+              <img src="../icons/upload-icon.png" alt="upload icon">
+              <div>
+                <strong>Upload Reviewer</strong>
+                <span>Add a new study material to your library.</span>
+              </div>
+            </button>
+
+            <button class="home-shortcut-card" type="button" data-home-target="quizzes-section">
+              <img src="../icons/plus-icon.png" alt="create quiz icon">
+              <div>
+                <strong>Create Quiz</strong>
+                <span>Build a quiz and test your knowledge.</span>
+              </div>
+            </button>
+
+            <button class="home-shortcut-card" type="button" data-home-target="progress-section">
+              <img src="../icons/progress-icon.png" alt="progress icon">
+              <div>
+                <strong>Check Progress</strong>
+                <span>Review your performance and study momentum.</span>
+              </div>
+            </button>
+          </div>
+        </section>
+      </section>
+    </section>
+
+    <!--Reviewers Section-->
+    <section id="reviewers-section" class="page-section">
+
+      <section id="reviewers" class="reviewers-container">
+
+        <div class="section-header">
+          <h2>Reviewers</h2>
+          <button class="upload-btn">
+            <img src="../icons/upload-icon.png" class="upload-icon">
+            Upload Reviewer
+          </button>
+        </div>
+
+        <div class="reviewer-tools">
+
+          <input type="text" id="reviewerSearch" placeholder="Search reviewers..." class="reviewer-search">
+
+          <div class="reviewer-filters"></div>
+
+        </div>
+
+        <div class="reviewer-sections">
+          <section class="reviewer-group" id="myReviewersSection">
+            <div class="reviewer-group-header">
+              <div>
+                <h3>My Reviewers</h3>
+                <p>Reviewers uploaded by you.</p>
+              </div>
+              <button class="reviewer-group-toggle" type="button" data-reviewer-group-toggle="my">
+                See All
+              </button>
+            </div>
+            <div class="reviewers-grid" id="myReviewersGrid"></div>
+            <p class="reviewer-group-empty" id="myReviewersEmpty">No reviewers found here.</p>
+          </section>
+
+          <section class="reviewer-group" id="otherReviewersSection">
+            <div class="reviewer-group-header">
+              <div>
+                <h3>Other Reviewers</h3>
+                <p>Reviewers uploaded by other users.</p>
+              </div>
+              <button class="reviewer-group-toggle" type="button" data-reviewer-group-toggle="other">
+                See All
+              </button>
+            </div>
+            <div class="reviewers-grid" id="otherReviewersGrid"></div>
+            <p class="reviewer-group-empty" id="otherReviewersEmpty">No reviewers found here.</p>
+          </section>
+        </div>
+
+        <div class="reviewer-preview" id="reviewerPreview">
+
+          <div class="preview-header">
+            <span id="previewTitle">Preview</span>
+            <button id="closePreview">Close</button>
+          </div>
+
+          <iframe id="previewFrame"></iframe>
+
+        </div>
+
+
+      </section>
+
+    </section>
+
+    <!--UPLOAD MODAL-->
+    <div class="modal" id="uploadModal">
+
+      <div class="modal-content upload-modal">
+
+        <h2>Upload Reviewer</h2>
+
+        <label for="reviewerTitle" class="modal-label">Reviewer Title</label>
+        <input type="text" id="reviewerTitle" placeholder="Reviewer Title">
+
+        <label for="reviewerCategory" class="modal-label">Category</label>
+        <select id="reviewerCategory">
+          <option value="math">Math</option>
+          <option value="physics">Physics</option>
+          <option value="chemistry">Chemistry</option>
+          <option value="biology">Biology</option>
+          <option value="general">General</option>
+          <option value="other">Other</option>
+        </select>
+
+        <input type="text" id="customCategory" placeholder="Enter custom category" style="display:none;">
+
+        <label for="reviewerFile" class="modal-label">Select File <span style="color: red;">[ PDF only • Max 50MB
+            ]</span></span></label>
+        <input type="file" id="reviewerFile" accept=".pdf,application/pdf">
+
+        <div class="modal-actions">
+          <button id="uploadReviewerConfirm">Upload</button>
+          <button id="closeUploadModal">Cancel</button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Rename Reviewer Modal -->
+    <div class="modal" id="renameModal">
+
+      <div class="modal-content rename-modal">
+
+        <h2>Rename Reviewer</h2>
+
+        <label class="modal-label">New Title</label>
+        <input type="text" id="renameInput" placeholder="Enter new title">
+
+        <div class="modal-actions">
+          <button id="confirmRename">Rename</button>
+          <button id="cancelRename">Cancel</button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!--Delete confirmation modal-->
+    <div class="modal" id="deleteModal">
+
+      <div class="modal-content delete-modal">
+
+        <h2 style="color:#dc2626;">Delete Reviewer</h2>
+        <div style="height: 5px;"></div>
+        <p>Are you sure you want to delete this reviewer?</p>
+
+        <div class="modal-actions">
+
+          <button id="confirmDeleteBtn" class="danger-btn">
+            Delete
+          </button>
+
+          <button id="cancelDeleteBtn">
+            Cancel
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!--Quizzes Section-->
+    <section id="quizzes-section" class="page-section">
+
+      <div class="section-header">
+        <h2>Quizzes</h2>
+
+        <div class="quiz-actions">
+          <button class="quiz-btn" id="openQuizModal">
+            <img src="../icons/plus-icon.png" class="quiz-icon" width="25px" height="25px">
+            Create Quiz
+          </button>
+        </div>
+      </div>
+
+      <div class="quiz-tools">
+
+        <input type="text" id="quizSearch" placeholder="Search quizzes..." class="reviewer-search">
+
+        <div class="quiz-filters"></div>
+
+      </div>
+
+      <div class="quiz-sections" id="quizSections">
+        <section class="quiz-group" id="myQuizzesSection">
+          <div class="quiz-group-header">
+            <div>
+              <h3>My Quizzes</h3>
+              <p>Quizzes you created.</p>
+            </div>
+            <button class="quiz-group-toggle" type="button" data-group-toggle="my">
+              See All
+            </button>
+          </div>
+          <div class="quiz-grid quiz-group-grid" id="myQuizGrid"></div>
+          <p class="quiz-group-empty" id="myQuizEmpty">No quizzes here yet.</p>
+        </section>
+
+        <section class="quiz-group" id="takenQuizzesSection">
+          <div class="quiz-group-header">
+            <div>
+              <h3>Quizzes Taken</h3>
+              <p>Quizzes you already completed.</p>
+            </div>
+            <button class="quiz-group-toggle" type="button" data-group-toggle="taken">
+              See All
+            </button>
+          </div>
+          <div class="quiz-grid quiz-group-grid" id="takenQuizGrid"></div>
+          <p class="quiz-group-empty" id="takenQuizEmpty">You have not completed any quizzes yet.</p>
+        </section>
+
+        <section class="quiz-group" id="otherQuizzesSection">
+          <div class="quiz-group-header">
+            <div>
+              <h3>Other Quizzes</h3>
+              <p>Quizzes from other creators you have not taken yet.</p>
+            </div>
+            <button class="quiz-group-toggle" type="button" data-group-toggle="other">
+              See All
+            </button>
+          </div>
+          <div class="quiz-grid quiz-group-grid" id="otherQuizGrid"></div>
+          <p class="quiz-group-empty" id="otherQuizEmpty">No other quizzes available right now.</p>
+        </section>
+      </div>
+
+      <div class="quiz-empty" id="quizEmptyState">
+        <img src="../icons/kwis-icon.png" alt="quiz icon" class="quiz-empty-icon">
+        <h3>No quizzes yet</h3>
+        <p>Create your first quiz to start testing your knowledge.</p>
+      </div>
+    </section>
+
+    <div class="modal" id="quizModal">
+      <div class="modal-content quiz-modal">
+        <div class="quiz-modal-header">
+          <div>
+            <h2>Create Quiz</h2>
+            <p>Build quizzes in a forms-style workflow with the same polished RebyuHub look.</p>
+          </div>
+          <button class="quiz-close-btn" id="closeQuizModal" type="button">Close</button>
+        </div>
+
+        <div class="quiz-modal-body">
+          <section class="quiz-settings-panel">
+            <div class="quiz-settings-head">
+              <span class="quiz-builder-chip">Quiz Settings</span>
+            </div>
+
+            <div class="quiz-form-field">
+              <label for="quizTitle" class="modal-label">Quiz Title</label>
+              <input type="text" id="quizTitle" placeholder="Ex. Physics Fundamentals">
+            </div>
+
+            <div class="quiz-form-field">
+              <label for="quizDescription" class="modal-label">Description</label>
+              <textarea id="quizDescription" rows="4" placeholder="Add a short description for this quiz."></textarea>
+            </div>
+
+            <div class="quiz-form-field">
+              <label for="quizCategory" class="modal-label">Category</label>
+              <select id="quizCategory">
+                <option value="">Select a category</option>
+                <option value="math">Math</option>
+                <option value="physics">Physics</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="biology">Biology</option>
+                <option value="general">General</option>
+                <option value="other">Other</option>
+              </select>
+              <input
+                type="text"
+                id="customQuizCategory"
+                placeholder="Enter custom category"
+                style="display:none;"
+              >
+            </div>
+
+            <div class="quiz-form-field">
+              <label for="quizOrderMode" class="modal-label">Question Order</label>
+              <select id="quizOrderMode">
+                <option value="ordered">In Order Number</option>
+                <option value="random">Random</option>
+              </select>
+            </div>
+
+          </section>
+
+          <section class="quiz-builder-panel">
+            <div class="quiz-builder-header">
+              <div>
+                <span class="quiz-builder-chip">Question Builder</span>
+                <h3>Design your quiz</h3>
+              </div>
+            </div>
+
+            <div id="quizQuestionsList" class="quiz-questions-list"></div>
+
+            <div class="quiz-builder-footer">
+              <button class="quiz-btn secondary" id="addQuestionBtn" type="button">Add Question</button>
+            </div>
+          </section>
+        </div>
+
+        <div class="modal-actions quiz-modal-actions">
+          <button id="saveQuizBtn" type="button">Save Quiz</button>
+          <button id="cancelQuizBtn" type="button">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!--Progress Section-->
+    <section id="progress-section" class="page-section">
+
+      <div class="section-header">
+        <h2>Your Progress</h2>
+      </div>
+
+      <div class="progress-stats">
+        <article class="progress-card">
+          <span class="progress-card-label">Completed Quizzes</span>
+          <p id="progressCompletedCount">0</p>
+          <span class="progress-card-note">Finished quiz attempts</span>
+        </article>
+
+        <article class="progress-card">
+          <span class="progress-card-label">Average Score</span>
+          <p id="progressAverageScore">0%</p>
+          <span class="progress-card-note">Across all completed quizzes</span>
+        </article>
+
+        <article class="progress-card">
+          <span class="progress-card-label">Best Score</span>
+          <p id="progressBestScore">0%</p>
+          <span class="progress-card-note">Highest result so far</span>
+        </article>
+
+        <article class="progress-card">
+          <span class="progress-card-label">Study Streak</span>
+          <p id="progressStreak">0 days</p>
+          <span class="progress-card-note">Consecutive study days</span>
+        </article>
+      </div>
+
+      <div class="progress-layout">
+        <section class="progress-panel progress-chart-panel">
+          <div class="progress-panel-header">
+            <div>
+              <span class="progress-panel-chip">Weekly Performance</span>
+              <h3>Last 7 days</h3>
+            </div>
+            <p id="progressChartSummary" class="progress-panel-copy">Loading progress data...</p>
+          </div>
+
+          <div class="chart-bars" id="progressWeeklyChart"></div>
+          <p class="progress-empty-note" id="progressWeeklyEmpty">No completed quizzes yet this week.</p>
+        </section>
+
+        <section class="progress-panel progress-categories-panel">
+          <div class="progress-panel-header">
+            <div>
+              <span class="progress-panel-chip">Category Insights</span>
+              <h3>Strongest categories</h3>
+            </div>
+          </div>
+
+          <div class="progress-category-list" id="progressCategoryList"></div>
+          <p class="progress-empty-note" id="progressCategoryEmpty">Take a few quizzes to unlock category insights.</p>
+        </section>
+      </div>
+
+      <section class="progress-panel progress-history-panel">
+        <div class="progress-panel-header">
+          <div>
+            <span class="progress-panel-chip">Recent Attempts</span>
+            <h3>Your latest quiz results</h3>
+          </div>
+        </div>
+
+        <div class="progress-recent-list" id="progressRecentList"></div>
+        <p class="progress-empty-note" id="progressRecentEmpty">Your completed quiz attempts will show here.</p>
+      </section>
+    </section>
+
+    <section id="creator-section" class="page-section">
+
+      <h1 class="section-title">About RebyuHub and Its Developer</h1>
+
+      <div class="creator-layout">
+        <div class="creator-card creator-about-card">
+          <h2>About RebyuHub</h2>
+          <p>
+            RebyuHub is a web platform designed to help students organize their study materials and improve learning through shared reviewers and interactive quizzes. Users can upload and browse reviewer files, categorize study resources, create quizzes, and test their knowledge in an organized and accessible environment.
+          </p>
+          <p>
+            This project was made possible with the assistance of artificial intelligence tools that supported development, design improvements, and problem solving throughout the creation of the system.
+          </p>
+        </div>
+
+        <div class="creator-card">
+
+          <img src="../images/creator-pic.jpeg" alt="Creator">
+
+          <h2>Romar Hinampas</h2>
+
+          <p class="creator-role">Developer of RebyuHub</p>
+          <p class="creator-year-level">3rd Year</p>
+          <p class="creator-program">BS in Computer Engineering</p>
+          <p class="creator-school">Rizal Technological University</p>
+
+          <div class="creator-socials">
+
+            <a href="#"><i class="fa fa-github"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/romar.username" target="_blank"><i class="fa fa-facebook"></i></a>
+
+          </div>
+
+          <button class="contact-btn">Contact</button>
+
+        </div>
+      </div>
+
+    </section>
+  </main>
+  <div id="alert-container"></div>
+
+  
+  <script src="../js/alert.js" defer></script>
+  <script src="../js/dashboard.js" defer></script>
+  <script src="../js/uploadmodal.js" defer></script>
+  <script src="../js/quizsystem.js" defer></script>
+  <script src="../js/confirmdeletemodal.js" defer></script>
+</body>
+
+</html>

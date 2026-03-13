@@ -1,0 +1,38 @@
+
+.back-control, .next-control{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  text-decoration:none;
+  color:var(--text-muted);
+  font-size:.9rem;
+  font-weight:500;
+
+  margin-bottom:30px;
+  padding: 8px 16px;
+
+  border-radius: 16px;
+
+  transition:color .25s ease;
+}
+
+.back-control img, .next-control img{
+  transition:transform 0.4s ease;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.back-control:hover, .next-control:hover{
+  color:#22C55E;
+  border:1px solid rgba(34,197,94,0.35);
+}
+
+.back-control:hover img{
+  transform:translateX(-10px);
+}
+
+.next-control:hover img{
+  transform:translateX(10px);
+}
